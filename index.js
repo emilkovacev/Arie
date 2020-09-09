@@ -106,12 +106,12 @@ client.on('message', async message => {
                 return message.channel.send(`Could not find ${tagName}`);
             }
             
-		} else if (command === 'show' || command === 's') {
+		} else if (command === 'list' || command === 'ls') {
             // equivalent to: SELECT name FROM tags;
             const tagList = await Tags.findAll({ attributes: ['name'] });
             const tagString = tagList.map(t => t.name).join(', ') || 'No movies set.';
             return message.channel.send(`${tagString}`);
-        } else if (command === 'find_info' || command == 'f') {
+        } else if (command === 'find' || command == 'f') {
             
             const tagName = commandArgs;
 
@@ -134,14 +134,14 @@ client.on('message', async message => {
 
             return message.channel.send(movieEmbed)
             
-		} else if (command === 'remove_movie' || command === 'r') {
+		} else if (command === 'remove' || command === 'rm') {
             const tagName = commandArgs;
             // equivalent to: DELETE from tags WHERE name = ?;
             const rowCount = await Tags.destroy({ where: { name: tagName } });
             if (!rowCount) return message.channel.send('That movie was not in the list.');
             
             return message.channel.send('Movie removed.');
-        } else if (command == 'clear_list' || command === 'c') {
+        } else if (command == 'clear') {
 
             if (message.member.hasPermission("ADMINISTRATOR")) {
                 const tagList = await Tags.findAll({ attributes: ['name'] });
@@ -157,18 +157,19 @@ client.on('message', async message => {
             } else {
                 return message.channel.send('Your lack of permissions is disturbing...');
             }
-        } else if (command == 'help' || command === 'h'){
+        } else if (command == 'help'){
             
             message.channel.send({embed: {
                 color: 10197915,
                 title: "Commands",
                 fields: [
-                    { name: '!add', value: 'Adds the name of the film following the command\n- Ex: !add Princess Mononoke\n- |!!| use commas to add multiple movies at once!' },
-                    { name: '!info / !i', value: 'finds the info of the film, as long as the film is in the list, following the command (In development)\n- Ex: !info Princess Mononoke' },
-                    { name: '!find_info / !f', value: 'finds the info of any film, following the command (In development)\n- Ex: !find_info Naruto Shippuden: The Movie' },
-                    { name: '!show / !s', value: 'shows the current list of films' },
-                    { name: '!clear / !c', value: 'clears the current list (only available to Mods)' },
-                    { name: '!rng', value: 'picks a random movie to watch, and clears it from the list' },
+                    { name: prefix + 'add', value: 'Adds the name of the film following the command\n- Ex: !add Princess Mononoke\n- |!!| use commas to add multiple movies at once!' },
+                    { name: prefix + 'remove / ' + prefix + 'rm', value: 'Removes the name of the film following the command\n- Ex: !remove Princess Mononoke\n- |!!| use commas to remove multiple movies at once!' },
+                    { name: prefix + 'info', value: 'finds the info of the film, as long as the film is in the list, following the command (In development)\n- Ex: ' + prefix + 'info Princess Mononoke' },
+                    { name: prefix + 'find', value: 'finds the info of any film, following the command\n- Ex: !find Naruto Shippuden: The Movie' },
+                    { name: prefix + 'list / ' + prefix + 'ls', value: 'shows the current list of films' },
+                    { name: prefix + 'clear', value: 'clears the current list (only available to Mods)' },
+                    { name: prefix + 'rng', value: 'picks a random movie to watch, and clears it from the list' },
                 ],
                 timestamp: new Date(),
                 footer: {
