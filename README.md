@@ -22,7 +22,7 @@ https://discordjs.guide/preparations/
 The Bot uses a database of the same name each time it creates a list.
 This functionality will be added in due time, thank you for your patience
 
-# @arie help for help/commands
+@arie help for help/commands
 
 Sources:
 https://discordjs.guide/creating-your-bot/adding-more-commands.html
