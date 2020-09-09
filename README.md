@@ -20,7 +20,14 @@ https://discordjs.guide/preparations/
 
 --Disclaimer--
 The Bot uses a database of the same name each time it creates a list.
-If you see movies you don't recognize, clear the list. The update will
-come in a few weeks, maybe don't use it until then.
+This functionality will be added in due time, thank you for your patience
 
 ------!h for help/commands------
+
+Sources:
+https://discordjs.guide/creating-your-bot/adding-more-commands.html
+* a significant portion of code has been used from this tutorial, as this was a starter bot
+
+https://www.digitalocean.com/community/tutorials/how-to-build-a-discord-bot-with-node-js
+https://discord.js.org/#/docs/main/stable/general/welcome
+https://discord.com/developers/docs/intro
